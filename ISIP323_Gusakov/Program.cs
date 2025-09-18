@@ -4,9 +4,9 @@ using System.Linq;
 
 enum Category //категории
 {
-    Electronics = 1,
-    Food = 2,
-    Clothing = 3
+    Electronics ,
+    Food ,
+    Clothing 
 }
 
 class Prod
@@ -19,7 +19,7 @@ class Prod
 
     public Prod(string name, decimal price, int quantity, Category category)// Конструктор с генерацией уникального кода
     {
-        Code = Guid.NewGuid().ToString().Substring(0, 6);
+        Code = Guid.NewGuid().ToString().Substring(0, 1);
         Name = name;
         Price = price;
         Quantity = quantity;
@@ -77,6 +77,11 @@ class Store
         else
             Console.WriteLine("Товар не найден.");
     }
+    public void ShowAll()
+    {
+        foreach (var p in products)
+            Console.WriteLine(p);
+    }
 }
 
 class Program
@@ -91,6 +96,8 @@ class Program
         store.AddProduct(new Prod("Ноутбук Lenovo", 59999.00m, 5, Category.Electronics));
         store.AddProduct(new Prod("Молоко 1л", 70.00m, 30, Category.Food));
         store.AddProduct(new Prod("Джинсы Wrangler", 3499.00m, 15, Category.Clothing));
+        Console.WriteLine("Товары в магазине:");
+        store.ShowAll();
         while (true)
         {
             ShowMenu();
