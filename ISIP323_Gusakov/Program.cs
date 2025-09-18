@@ -26,7 +26,7 @@ class Prod
         Category = category;
     }
 
-    public override string ToString()
+    public override string ToString() // Переопределение ToString для удобного вывода информации о товаре
     {
         return $"Код: {Code}, Название: {Name}, Цена: {Price}, Кол-во: {Quantity}, Категория: {Category}";
     }
