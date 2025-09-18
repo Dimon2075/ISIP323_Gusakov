@@ -85,6 +85,12 @@ class Program
 
     static void Main()
     {
+        store.AddProduct(new Prod("Смартфон Samsung", 29999.99m, 10, Category.Electronics));
+        store.AddProduct(new Prod("Хлеб ржаной", 35.50m, 50, Category.Food));
+        store.AddProduct(new Prod("Футболка Adidas", 1499.99m, 25, Category.Clothing));
+        store.AddProduct(new Prod("Ноутбук Lenovo", 59999.00m, 5, Category.Electronics));
+        store.AddProduct(new Prod("Молоко 1л", 70.00m, 30, Category.Food));
+        store.AddProduct(new Prod("Джинсы Wrangler", 3499.00m, 15, Category.Clothing));
         while (true)
         {
             ShowMenu();
