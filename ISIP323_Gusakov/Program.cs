@@ -13,9 +13,9 @@ class TextSt
     public int ConsonantCount { get; set; }
     public Dictionary<char, int> LetterFreq { get; set; }
 
-    public TextSt(string Text)
+    public TextSt(string text)
     {
-        Text = Text;
+        Text = text;
         LetterFreq = new Dictionary<char, int>();
     }
 }
@@ -24,14 +24,14 @@ class Pr
 {
     static readonly char[] SentDelimetres = { '.', '?', '!' };
     static readonly char[] WordSepar = { ' ', '\t', '\n', '\r', ',', ';', ':', '-', '(', ')', '"', '«', '»', '—' };
-    static readonly HashSet<char> Vowels = new HashSet<char> { 'а', 'е', 'ё', 'и', 'о', 'у', 'ы', 'э', 'ю', 'я',
-                                                               'А', 'Е', 'Ё', 'И', 'О', 'У', 'Ы', 'Э', 'Ю', 'Я'};
-    static readonly HashSet<char> Consonants = new HashSet<char> { 'б', 'в', 'г', 'д', 'ж', 'з', 'й', 'к',
-                                                                   'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф',
-                                                                   'х', 'ц', 'ч', 'ш', 'щ',
-                                                                   'Б', 'В', 'Г', 'Д', 'Ж', 'З', 'Й', 'К',
-                                                                   'Л', 'М', 'Н', 'П', 'Р', 'С', 'Т', 'Ф',
-                                                                   'Х', 'Ц', 'Ч', 'Ш', 'Щ' };
+    static readonly char[] Vowels = { 'а', 'е', 'ё', 'и', 'о', 'у', 'ы', 'э', 'ю', 'я',
+                                      'А', 'Е', 'Ё', 'И', 'О', 'У', 'Ы', 'Э', 'Ю', 'Я'};
+    static readonly char[] Consonants = { 'б', 'в', 'г', 'д', 'ж', 'з', 'й', 'к',
+                                          'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф',
+                                                'х', 'ц', 'ч', 'ш', 'щ',
+                                                'Б', 'В', 'Г', 'Д', 'Ж', 'З', 'Й', 'К',
+                                              'Л', 'М', 'Н', 'П', 'Р', 'С', 'Т', 'Ф',
+                                                   'Х', 'Ц', 'Ч', 'Ш', 'Щ' };
 
     static List<TextSt> StaticHistory = new List<TextSt>();
 
@@ -202,7 +202,6 @@ class Pr
         }
         return wordList.ToArray();
     }
-    // Метод обрезки нежелательных знаков препинания с начала и конца слова
     static string TrimWord(string word)
     {
         int left = 0;
