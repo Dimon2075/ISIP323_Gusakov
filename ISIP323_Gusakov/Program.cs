@@ -1,246 +1,79 @@
-﻿using System;
-using System.Collections.Generic;
-
-class TextSt
+﻿public enum Genr
 {
-    public string Text { get; set; }
+    Fiction,
+    NonFiction,
+    Mystery,
+    ScienceFiction,
+    Fantasy,
+    Biograhy
+}
 
-    public int WordCount { get; set; }
-    public string ShortesWord { get; set; }
-    public string LongesWord { get; set; }
-    public int SentencCount { get; set; }
-    public int VowelCount { get; set; }
-    public int ConsonantCount { get; set; }
-    public Dictionary<char, int> LetterFreq { get; set; }
+public class Book
+{
+    private static int PervID = 1;
+    public int ID { get; private set; }
+    public string Title { get; set; }
+    public string Author { get; set; }
+    public Genr Genr { get; set; }
+    public int Year { get; set; }
+    public decimal Price { get; set; }
 
-    public TextSt(string text)
+    public Book(string title, string author, Genr genr, int year, decimal price)
     {
-        Text = text;
-        LetterFreq = new Dictionary<char, int>();
+        ID = PervID;
+        Title = title;
+        Author = author;
+        Genr = genr;
+        Year = year;
+        Price = price;
     }
 }
 
-class Pr
+public class Libr
 {
-    static readonly char[] SentDelimetres = { '.', '?', '!' };
-    static readonly char[] WordSepar = { ' ', '\t', '\n', '\r', ',', ';', ':', '-', '(', ')', '"', '«', '»', '—' };
-    static readonly char[] Vowels = { 'а', 'е', 'ё', 'и', 'о', 'у', 'ы', 'э', 'ю', 'я',
-                                      'А', 'Е', 'Ё', 'И', 'О', 'У', 'Ы', 'Э', 'Ю', 'Я'};
-    static readonly char[] Consonants = { 'б', 'в', 'г', 'д', 'ж', 'з', 'й', 'к',
-                                          'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф',
-                                                'х', 'ц', 'ч', 'ш', 'щ',
-                                                'Б', 'В', 'Г', 'Д', 'Ж', 'З', 'Й', 'К',
-                                              'Л', 'М', 'Н', 'П', 'Р', 'С', 'Т', 'Ф',
-                                                   'Х', 'Ц', 'Ч', 'Ш', 'Щ' };
-
-    static List<TextSt> StaticHistory = new List<TextSt>();
-
-    static void Main(string[] args)
+    private List<Book> books = new List<Book>(); 
+    public void AddBook(Book book)
     {
-        Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-        while(true)
-        {
-            string UsInput = ReadUsInput();
-
-            TextSt stats = AnalyzeText(UsInput);
-
-            StaticHistory.Add(stats);
-
-            PrintStatistics(stats);
-
-            Console.WriteLine("\nНовый текст? (д/н)");
-            string answer = Console.ReadLine().Trim().ToLower();
-            if (answer != "д" && answer != "да")
-                break;
-        }
-
-        Console.WriteLine("\nВывести статистику по всем текстам? (д/н)");
-        string showAll = Console.ReadLine().Trim().ToLower();
-        if (showAll =="д" || showAll == "да")
-        {
-            for (int i = 0; i < StaticHistory.Count; i++)
-            {
-                Console.WriteLine($"\nСтатистика для текста #{i + 1}:");
-                PrintStatistics(StaticHistory[i]);
-            }
-        }    
     }
-
-    static string ReadUsInput()
+    public void RemoveBook(int ID)
     {
-        string input;
-        do
-        {
-            Console.WriteLine("Введи текст (минимально соточка слов - 100 слов)");
-            input = Console.ReadLine();
-            if (input == null) input = "";
 
-            if (input.Length < 100)
-                Console.WriteLine($"Текст маловат будет браток {input.Length}, введи больше");
-        } while (input.Length < 100);
-
-        return input;
     }
-
-    static TextSt AnalyzeText(string text)
+    public IEnumerable<Book> PoiskNazvania(string title)
     {
-        TextSt stats = new TextSt(text);
 
-        stats.SentencCount = CountSentenes(text);
-
-        string[] words = SplitIntoWords(text);
-        stats.WordCount = words.Length;
-
-        if (words.Length > 0)
-        {
-            stats.ShortesWord = words[0];
-            stats.LongesWord = words[0];
-
-            for(int i  = 1; i < words.Length;i++)
-            {
-                string word = words[i];
-                if (word.Length < stats.ShortesWord.Length)
-                    stats.ShortesWord = word;
-
-                if (word.Length > stats.LongesWord.Length)
-                    stats.LongesWord = word;
-            }
-        }
-        else
-        {
-            stats.ShortesWord = "";
-            stats.LongesWord = "";
-        }
-
-        foreach (char c in text)
-        {
-            if ((c >= 'А' && c <= 'я') || c == 'ё' || c == 'Ё')
-            {
-                char lowerChar = char.ToLower(c);
-
-                if (Vowels.Contains(c))
-                    stats.VowelCount++;
-                else if (Consonants.Contains(c))
-                    stats.ConsonantCount++;
-
-                if (stats.LetterFreq.ContainsKey(lowerChar))
-                    stats.LetterFreq[lowerChar]++;
-                else
-                    stats.LetterFreq[lowerChar] = 1;
-            }    
-        }
-        return stats;
     }
-
-    static int CountSentenes(string text)
+    public IEnumerable<Book> PoickAutora(string author)
     {
-        int count = 0;
-        
-        for (int i = 0; i < text.Length;i++)
-        {
-            char ch = text[i];
-            for (int j = 0; j < SentDelimetres.Length; j++)
-            {
-                if(ch == SentDelimetres[j])
-                {
-                    count++;
-                    break;
-                }
-            }
-        }
-        return count;
+
     }
-
-    static string[] SplitIntoWords(string text)
+    public IEnumerable<Book> PoiskGenr(Genr genr)
     {
-        List<string> wordList = new List<string>();
 
-        int start = -1;
-
-        for (int i = 0; i < text.Length;i++)
-        {
-            char ch = text[i];
-            bool isSeparator = false;
-
-            for (int j = 0; j < WordSepar.Length; j++)
-            {
-                if (ch == WordSepar[j])
-                {
-                    isSeparator = true;
-                    break;
-                }
-            }
-
-            if (!isSeparator)
-            {
-                if (start == -1)
-                    start = i;
-            }
-            else
-            {
-                if (start != - 1)
-                {
-                    int length = i - start;
-                    if (length > 0)
-                    {
-                        string word = text.Substring(start, length);
-                        word = TrimWord(word);
-                        if (word.Length > 0)
-                            wordList.Add(word);
-                    }
-                    start = -1;
-                }
-            }
-        }
-        if (start != -1 && start <  text.Length)
-        {
-            string word = text.Substring(start, text.Length - start);
-            word = TrimWord(word);
-            if (word.Length > 0)
-                wordList.Add(word);
-        }
-        return wordList.ToArray();
     }
-    static string TrimWord(string word)
+    public IEnumerable<Book> SortNazv()
     {
-        int left = 0;
-        int right = word.Length - 1;
 
-        while (left <= right && !IsLetterOrDigit(word[left]))
-            left++;
-
-        while (right >= left && !IsLetterOrDigit(word[right]))
-            right--;
-
-        if (left > right)
-            return "";
-
-        return word.Substring(left, right - left + 1);
     }
-
-    static bool IsLetterOrDigit(char c)
+    public IEnumerable<Book> SortYear()
     {
-        return Char.IsLetter(c) || Char.IsDigit(c);
+
     }
-
-    static void PrintStatistics(TextSt stats)
+    public Book Dorogaya()
     {
-        Console.WriteLine("\nСтатистика анализа текста:");
-        Console.WriteLine($"Общее количество слов: {stats.WordCount}");
-        Console.WriteLine($"Самое короткое слово: {stats.ShortesWord}");
-        Console.WriteLine($"Самое длинное слово: {stats.LongesWord}");
-        Console.WriteLine($"Количество предложений: {stats.SentencCount}");
-        Console.WriteLine($"Количество гласных букв: {stats.VowelCount}");
-        Console.WriteLine($"Количество согласных букв: {stats.ConsonantCount}");
-        Console.WriteLine("Статистика частоты встречаемости букв:");
 
-        List<char> letters = new List<char>(stats.LetterFreq.Keys);
-        letters.Sort();
+    }
+    public Book Dehevaa()
+    {
 
-        foreach (char letter in letters)
-        {
-            Console.WriteLine($"'{letter}': {stats.LetterFreq[letter]}");
-        }
+    }
+    public Dictionary<string, int> Static()
+    {
+
+    }
+    public void initial()
+    {
+
     }
 }
