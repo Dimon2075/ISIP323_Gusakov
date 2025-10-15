@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-public abstract class Person
+public abstract class Person //Содержит все без реализации
 {
-    public int ID { get; protected set; }
+    public int ID { get; protected set; } //Досутпен внутри класса и к производным классам
     public string Name { get; protected set; }
     public int Age { get; protected set; }
     public string Email { get; protected set; }
@@ -113,7 +113,7 @@ public class Universitity
             students.Remove(student);
         }
     }
-    public Student GetStudent(int id) => students.FirstOrDefault(s => s.ID == id);
+    public Student GetStudent(int id) => students.FirstOrDefault(s => s.ID == id);//Возвращает первый элемент из посл.
     public void AddTeacher(Teacher teacher) 
     {
         if (!teachers.Any(t => t.ID == teacher.ID))
@@ -147,7 +147,7 @@ public class Universitity
         }
     }
     public Course GetCourse(int id) => courses.FirstOrDefault(c => c.ID == id);
-    public IEnumerable<Student> GetAllStudents() => students;
+    public IEnumerable<Student> GetAllStudents() => students; //Перебор элементов в коллекцию
     public IEnumerable<Teacher> GetAllTeachers() => teachers;
     public IEnumerable<Course> GetAllCourses() => courses;
 }
@@ -220,7 +220,7 @@ public class Pr5
         }
         return value;
     }
-    static void AddStudent()
+    static void AddStudent() //Добавление студента
     {
         int id = GetIntInput("Введите ID студента: ");
         Console.Write("Введите имя: ");
@@ -232,7 +232,7 @@ public class Pr5
         universitity.AddStudent(student);
         Console.WriteLine("Студент добавлен.");
     }
-    static void AddTeacher()
+    static void AddTeacher() //Добавление препода
     {
         int id = GetIntInput("Введите ID преподователя: ");
         Console.Write("Введите имя: ");
@@ -244,7 +244,7 @@ public class Pr5
         universitity.AddTeacher(teacher);
         Console.WriteLine("Преподователь добавлен.");
     }
-    static void CreateCourse()
+    static void CreateCourse() //Создать курс
     {
         int id = GetIntInput("Введите ID курса: ");
         Console.Write("Введите название курса: ");
@@ -263,7 +263,7 @@ public class Pr5
         universitity.AddCourse(course);
         Console.WriteLine("Курс СОЗДАН.");
     }
-    static void EnrolledStudentInCourse()
+    static void EnrolledStudentInCourse() //Записать студента на курс
     {
         Console.WriteLine("Доступные студенты:");
         foreach (var s in universitity.GetAllStudents())
@@ -289,25 +289,25 @@ public class Pr5
         student.EnrollInCourse(course);
         Console.WriteLine($"Студент {student.Name}, записан на курс {course.Name}.");
     }
-    static void ShowAllStudents()
+    static void ShowAllStudents() //Просмотр студентов
     {
         Console.WriteLine("Все студенты:");
         foreach (var s in universitity.GetAllStudents())
             Console.WriteLine(s.GetDetails());
     }
-    static void ShowAllCourses()
+    static void ShowAllCourses() //Просмотр курсов
     {
         Console.WriteLine("Все курсы:");
         foreach (var c in universitity.GetAllCourses())
             Console.WriteLine(c.GetDetails());
     }
-    static void ShowAllTeachers()
+    static void ShowAllTeachers() //Просмотр преподов
     {
         Console.WriteLine("Все преподы:");
         foreach (var t in universitity.GetAllTeachers())
             Console.WriteLine(t.GetDetails());
     }
-    static void ShowCourseDetails()
+    static void ShowCourseDetails() //Просмотр деталей курса
     {
         int id = GetIntInput("Введит ID курса: ");
         var course = universitity.GetCourse(id);
@@ -321,13 +321,13 @@ public class Pr5
         foreach(var s in course.EnrolledStudents)
             Console.WriteLine(s.GetDetails());
     }
-    static void RemoveStudent()
+    static void RemoveStudent() //Депнуть студента
     {
         int id = GetIntInput("Введи ID студента");
         universitity.RemoveStudent(id);
         Console.WriteLine("Yes. Депнули студента");
     }
-    static void RemoveCourse()
+    static void RemoveCourse() //Депнуть курс
     {
         int id = GetIntInput("Введи ID курса");
         universitity.RemoveCourse(id);
