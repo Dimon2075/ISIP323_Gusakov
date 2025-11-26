@@ -9,6 +9,6 @@ namespace ISIP323_Gusakov_Framework1
 {
     public static class Core
     {
-        public static MarketplaceEntities Context = new MarketplaceEntities();
+        public static MarketplaceEntities8 Context = new MarketplaceEntities8();
     }
 }

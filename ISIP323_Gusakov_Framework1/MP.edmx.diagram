@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e6b0c42d9b8d4dd7b7a2034d1f3d4f2a" Name="Diagram1">
+        <EntityTypeShape EntityType="MarketplaceModel.CartItems" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MarketplaceModel.Carts1" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MarketplaceModel.OrderItems" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MarketplaceModel.Orders" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MarketplaceModel.PickupPoints" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="MarketplaceModel.Products" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MarketplaceModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MarketplaceModel.Users" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MarketplaceModel.Users1" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="MarketplaceModel.FK_CartItems_Carts1" ManuallyRouted="false" />
+        <AssociationConnector Association="MarketplaceModel.FK_CartItems_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="MarketplaceModel.FK_Carts1_Users1" ManuallyRouted="false" />
+        <AssociationConnector Association="MarketplaceModel.FK_OrderItems_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="MarketplaceModel.FK_OrderItems_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="MarketplaceModel.FK__Orders__PickupPo__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="MarketplaceModel.FK_Orders_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="MarketplaceModel.FK_Orders_Users1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

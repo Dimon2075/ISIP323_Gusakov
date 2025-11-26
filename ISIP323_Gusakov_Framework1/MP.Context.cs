@@ -13,10 +13,10 @@ namespace ISIP323_Gusakov_Framework1
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MarketplaceEntities : DbContext
+    public partial class MarketplaceEntities8 : DbContext
     {
-        public MarketplaceEntities()
-            : base("name=MarketplaceEntities")
+        public MarketplaceEntities8()
+            : base("name=MarketplaceEntities8")
         {
         }
     
@@ -25,12 +25,14 @@ namespace ISIP323_Gusakov_Framework1
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Categories> Categories { get; set; }
+        public virtual DbSet<CartItems> CartItems { get; set; }
+        public virtual DbSet<Carts1> Carts1 { get; set; }
         public virtual DbSet<OrderItems> OrderItems { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<PickupPoints> PickupPoints { get; set; }
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Users1> Users1 { get; set; }
     }
 }

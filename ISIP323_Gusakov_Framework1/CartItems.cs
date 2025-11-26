@@ -12,18 +12,14 @@ namespace ISIP323_Gusakov_Framework1
     using System;
     using System.Collections.Generic;
     
-    public partial class Categories
+    public partial class CartItems
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Categories()
-        {
-            this.Products = new HashSet<Products>();
-        }
+        public int CartItemID { get; set; }
+        public int CartID { get; set; }
+        public int ProductID { get; set; }
+        public int Quantity { get; set; }
     
-        public int CategoryID { get; set; }
-        public string Name { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Products> Products { get; set; }
+        public virtual Carts1 Carts1 { get; set; }
+        public virtual Products Products { get; set; }
     }
 }

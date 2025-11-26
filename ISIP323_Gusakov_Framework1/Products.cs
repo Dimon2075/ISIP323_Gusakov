@@ -17,6 +17,7 @@ namespace ISIP323_Gusakov_Framework1
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Products()
         {
+            this.CartItems = new HashSet<CartItems>();
             this.OrderItems = new HashSet<OrderItems>();
         }
     
@@ -24,9 +25,10 @@ namespace ISIP323_Gusakov_Framework1
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
-        public int CategoryID { get; set; }
+        public int StockQuantity { get; set; }
     
-        public virtual Categories Categories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CartItems> CartItems { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItems> OrderItems { get; set; }
     }
